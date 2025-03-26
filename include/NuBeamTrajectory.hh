@@ -155,6 +155,7 @@ public:
     G4ThreeVector fPosition;
     G4ThreeVector fPolarization;
     G4double      fTime;
+    G4double      fTravelDistance; // actual traveled distance
     G4int         fStepNumber;
     G4int         fMaterialNumber;
     G4String      fMaterialName;

@@ -111,7 +111,7 @@ void NuBeamTrajectory::AddTrajectoryPoint(const G4Track* aTrack, G4String creato
   newPoint.fMaterialNumber=aMat->GetIndex();
   newPoint.fMaterialName=aMat->GetName();
   newPoint.fVolumeName=aTrack->GetVolume()->GetName();
-
+  newPoint.fTravelDistance=aTrack->GetTrackLength();
   fTrajectoryPoints.push_back(newPoint);
 }
 

@@ -369,7 +369,8 @@ void NuBeamOutput::RecordNeutrino(const G4Track* track)
     ((NuBeamTrackInformation*)track->GetUserInformation())->GetCreatorModelName();
   NuBeamTrajectory* nutraj=new NuBeamTrajectory(track);
   nutraj->AddTrajectoryPoint(track,creatorProc);
-  nutraj->AddTrajectoryPoint(track,creatorProc);
+  nutraj->AddTrajectoryPoint(track,"Final"); // get information from the last step
+  //nutraj->AddTrajectoryPoint(track,creatorProc);
   trajs.push_back(nutraj);
 
   fDk2Nu->ancestor.clear();
@@ -387,6 +388,7 @@ void NuBeamOutput::RecordNeutrino(const G4Track* track)
       a.starty  = trajPoints[iTP].fPosition[1]/CLHEP::cm;
       a.startz  = trajPoints[iTP].fPosition[2]/CLHEP::cm;
       a.startt  = trajPoints[iTP].fTime;
+      a.tracklength = trajPoints[trajPoints.size()-1].fTravelDistance;
       a.startpx = trajPoints[iTP].fMomentum[0]/CLHEP::GeV;
       a.startpy = trajPoints[iTP].fMomentum[1]/CLHEP::GeV;
       a.startpz = trajPoints[iTP].fMomentum[2]/CLHEP::GeV;
@@ -403,6 +405,7 @@ void NuBeamOutput::RecordNeutrino(const G4Track* track)
       a.proc    = trajPoints[iTP].fCreatorProcessName;
       a.ivol    = trajPoints[iTP].fVolumeName;
       a.imat    = trajPoints[iTP].fMaterialName;
+      //std::cout << a << std::endl; // tmp print out
       fDk2Nu->ancestor.push_back(a);
     }
   }
